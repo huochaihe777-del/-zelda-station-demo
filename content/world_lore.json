@@ -1,0 +1,43 @@
+{
+  "setting": "边境驿站位于海拉鲁平原与东边山路的交界处，是旅人补给、商人交易和士兵巡逻的中转点。",
+  "locations": [
+    {
+      "id": "station",
+      "name": "边境驿站",
+      "tags": ["safe_zone", "trade", "quest_hub"],
+      "summary": "黄昏时灯火温暖，雨夜时会收留旅人，但老板娘非常重视账本和补给登记。"
+    },
+    {
+      "id": "east_cave",
+      "name": "东边山洞",
+      "tags": ["danger", "quest", "blood_moon"],
+      "summary": "最近有异响传出，血月前夜附近魔物活跃，士兵会限制伤员单独进入。"
+    }
+  ],
+  "eventRules": [
+    {
+      "id": "blood_moon",
+      "trigger": "bloodMoonCountdown == 0",
+      "effect": "士兵戒备升级，NPC 更倾向阻止玩家离开驿站。"
+    },
+    {
+      "id": "soup_theft",
+      "trigger": "player.behaviorTags includes thief",
+      "effect": "惠子和士兵会提高警惕，商人会把这件事当作谈判筹码。"
+    },
+    {
+      "id": "helpful_reputation",
+      "trigger": "player.behaviorTags includes helpful",
+      "effect": "商人给折扣，惠子更愿意托付任务，伊莱会把玩家写进短歌。"
+    },
+    {
+      "id": "rain_owl_letter",
+      "trigger": "worldState.weather == rain && caveStatus == unexplored",
+      "effect": "驿站门口出现猫头鹰密信，玩家拾取后触发禁林来信任务线。"
+    }
+  ],
+  "assetPipeline": {
+    "storage": "这些内容不是关系表字段，而是半结构化世界观资产；后端按任务读取后可参与模板匹配或被 L3 装成 Context Pack。",
+    "files": ["npc_profiles.json", "dialogue_templates.json", "world_lore.json"]
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "hostess": [
+    {
+      "condition": { "hasBehaviorTag": "thief" },
+      "conditionDesc": "玩家有 thief 标签",
+      "text": "你！我的暖暖汤是你拿的吧！赶紧还回来！",
+      "actions": [
+        { "label": "归还暖暖汤", "effect": "return_soup" },
+        { "label": "装傻", "effect": "deny" },
+        { "label": "离开", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": { "caveStatus": "letter_received" },
+      "conditionDesc": "玩家雨天捡到了猫头鹰密信",
+      "text": "这封信的封蜡不普通，里面还提到禁林和受伤的独角兽。你先别急着进山，我把任务登记好，再让大壮查通行。",
+      "actions": [
+        { "label": "接受任务", "effect": "accept_quest_cave" },
+        { "label": "先等等", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": { "playerHpPct": [0, 0.3] },
+      "conditionDesc": "玩家血量 < 30%",
+      "text": "哎呀，你怎么伤成这样！快进来休息一下！",
+      "actions": [
+        { "label": "谢谢关心", "effect": "rest" },
+        { "label": "我没事", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": { "weather": "rain" },
+      "conditionDesc": "天气 = 雨天",
+      "text": "外面雨好大！快进来避避雨吧。",
+      "actions": [
+        { "label": "好的", "effect": "enter" },
+        { "label": "我赶路", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": { "minVisitCount": 3 },
+      "conditionDesc": "来访次数 >= 3",
+      "text": "又来啦？老朋友！今天想吃点什么？",
+      "actions": [
+        { "label": "来碗暖汤", "effect": "accept_soup" },
+        { "label": "随便聊聊", "effect": "chat" }
+      ]
+    },
+    {
+      "condition": { "timeOfDay": "night" },
+      "conditionDesc": "时段 = 夜晚",
+      "text": "这么晚了还在外面跑？快进来歇歇吧。",
+      "actions": [
+        { "label": "好的", "effect": "rest" },
+        { "label": "我还有事", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": {},
+      "conditionDesc": "默认",
+      "text": "旅行者你好！要不要来碗暖汤？",
+      "actions": [
+        { "label": "好的，谢谢", "effect": "accept_soup" },
+        { "label": "不用了", "effect": "leave" }
+      ]
+    }
+  ],
+  "merchant": [
+    {
+      "condition": { "caveStatus": "letter_received" },
+      "conditionDesc": "玩家持有猫头鹰密信",
+      "text": "猫头鹰送来的封蜡信？这种东西通常不只是问路。要进东边山路，火油、解毒药和一件防雨斗篷都别省。",
+      "actions": [
+        { "label": "看看货", "effect": "browse" },
+        { "label": "离开", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": { "hasBehaviorTag": "thief" },
+      "conditionDesc": "玩家有 thief 标签",
+      "text": "嘿……我听说老板娘丢了东西。你最好小心点，别让士兵注意到你。",
+      "actions": [
+        { "label": "你什么意思？", "effect": "question" },
+        { "label": "离开", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": { "hasBehaviorTag": "helpful" },
+      "conditionDesc": "玩家有 helpful 标签",
+      "text": "嘿伙计！老板娘刚才夸你来着，说你是个好人。我这有个独家情报，要不要听听？",
+      "actions": [
+        { "label": "说来听听", "effect": "listen_intel" },
+        { "label": "不了", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": { "weather": "rain" },
+      "conditionDesc": "天气 = 雨天",
+      "text": "雨夜赶路要多备火油。今天药品可不便宜，但我保证有用。",
+      "actions": [
+        { "label": "看看货", "effect": "browse" },
+        { "label": "离开", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": {},
+      "conditionDesc": "默认",
+      "text": "嘿，伙计！路过的吧？看看我的好货，绝对全平原最低价。",
+      "actions": [
+        { "label": "看看", "effect": "browse" },
+        { "label": "不了", "effect": "leave" }
+      ]
+    }
+  ],
+  "soldier": [
+    {
+      "condition": { "hasBehaviorTag": "thief" },
+      "conditionDesc": "玩家有 thief 标签",
+      "text": "你。我在盯着你。别在驿站搞事。",
+      "actions": [
+        { "label": "低头走开", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": { "caveStatus": "quest_accepted" },
+      "conditionDesc": "惠子已登记禁林来信任务",
+      "text": "惠子的登记我看到了。密信、雨夜、东边山路，全都对上了。拿好通行许可，进山后不要离队。",
+      "actions": [
+        { "label": "领取许可", "effect": "grant_cave_permit" },
+        { "label": "离开", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": { "bloodMoonCountdown": 0 },
+      "conditionDesc": "血月倒计时 = 0",
+      "text": "血月之夜。所有人留在室内。这不是建议，是命令。",
+      "actions": [
+        { "label": "明白", "effect": "stay" }
+      ]
+    },
+    {
+      "condition": { "playerHpPct": [0, 0.3] },
+      "conditionDesc": "玩家血量 < 30%",
+      "text": "你现在的状态不能进山。先去休息，再谈任务。",
+      "actions": [
+        { "label": "明白", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": {},
+      "conditionDesc": "默认",
+      "text": "注意安全。",
+      "actions": [
+        { "label": "好的", "effect": "leave" }
+      ]
+    }
+  ],
+  "bard": [
+    {
+      "condition": { "hasBehaviorTag": "thief" },
+      "conditionDesc": "玩家有 thief 标签",
+      "text": "一碗暖汤失了踪，炉火旁边起了风。",
+      "actions": [
+        { "label": "笑笑", "effect": "chat" },
+        { "label": "离开", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": { "hasBehaviorTag": "helpful" },
+      "conditionDesc": "玩家有 helpful 标签",
+      "text": "有人守住血月夜，驿站灯火未曾灭。",
+      "actions": [
+        { "label": "过奖了", "effect": "chat" },
+        { "label": "离开", "effect": "leave" }
+      ]
+    },
+    {
+      "condition": {},
+      "conditionDesc": "默认",
+      "text": "旅人啊，路过此地，可愿听我一段小调？",
+      "actions": [
+        { "label": "听一段", "effect": "listen_intel" },
+        { "label": "离开", "effect": "leave" }
+      ]
+    }
+  ]
+}

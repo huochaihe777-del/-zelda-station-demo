@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>同一个游戏场景，在三层数据能力下会变成什么？</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <h1>游戏创作任务：三代数据技术分别解决什么？</h1>
+      <div id="mode-tabs">
+        <button data-mode="player"     class="mode-tab active">玩家模式</button>
+        <button data-mode="creator"    class="mode-tab">数据流程分析</button>
+      </div>
+      <div id="generation-tabs">
+        <button data-gen="gen1" class="tab">结构化</button>
+        <button data-gen="gen2" class="tab">+ 半结构化/文件</button>
+        <button data-gen="gen3" class="tab active">+ 模型友好存储</button>
+      </div>
+    </header>
+
+    <div id="stage">
+      <div id="canvas-col">
+        <div id="canvas-wrap">
+          <canvas id="game-canvas" width="640" height="480" tabindex="0"></canvas>
+
+          <div id="dialogue-box" class="hidden">
+            <div id="dialogue-header">
+              <img id="dialogue-npc-avatar" alt="" />
+              <div id="dialogue-npc-meta">
+                <div id="dialogue-npc-name"></div>
+              </div>
+            </div>
+            <div id="dialogue-text"></div>
+            <div id="dialogue-actions"></div>
+          </div>
+
+          <div id="hint">
+            <span>方向键 / WASD 移动</span> ·
+            <span>空格 与面前的目标交互</span> ·
+            <span>E 背包</span> ·
+            <span>R 重置</span>
+          </div>
+        </div>
+
+        <div id="quick-status">
+          <span id="hp-display">❤️ HP 100/100</span>
+          <span id="inventory-display">🎒 空</span>
+          <span id="tags-display">🏷️ 无</span>
+          <span id="visit-display">📍 0 次</span>
+          <span class="sep">|</span>
+          <span id="weather-display">☀️ 晴天</span>
+          <span id="time-display">🌆 黄昏</span>
+          <span id="bloodmoon-display">🌑 血月 2 天</span>
+          <span id="cave-display">⛰️ 山洞 未探索</span>
+          <span class="sep">|</span>
+          <span id="backend-status">🗄️ 后端连接中…</span>
+        </div>
+
+        <div id="demo-scenes">
+          <span class="scene-label">一键场景：</span>
+          <button data-scene="good"    class="scene-btn">🎭 好人</button>
+          <button data-scene="thief"   class="scene-btn">🦹 小偷</button>
+          <button data-scene="letter"  class="scene-btn">✉️ 禁林来信</button>
+          <button data-scene="extreme" class="scene-btn scene-extreme">🌪️ 极端复合</button>
+        </div>
+
+        <div id="demo-controls">
+          <button data-action="weather-clear">☀️ 晴</button>
+          <button data-action="weather-rain">🌧️ 雨</button>
+          <button data-action="time-morning">🌅 晨</button>
+          <button data-action="time-night">🌙 夜</button>
+          <button data-action="blood-moon">🔴 血月</button>
+          <button data-action="injury">💔 受伤</button>
+          <button data-action="reset">🔄 重置</button>
+        </div>
+      </div>
+
+      <aside id="sidebar">
+        <section id="dataflow-section">
+          <h3>📡 这句话是怎么来的？</h3>
+          <div id="dataflow-mode-title">+ 模型友好存储 · 上下文资产 + Agent</div>
+          <div id="dataflow-mode-summary"></div>
+
+          <div class="df-block">
+            <h4>📝 创作态 · 数据存成什么样</h4>
+            <div id="storage-view"></div>
+          </div>
+
+          <div class="df-block">
+            <h4>🎮 运行态 · 玩家碰到时怎么消费</h4>
+            <pre id="query-view" class="code-block"></pre>
+          </div>
+
+          <div class="df-block" id="vector-recall-block">
+            <h4>🧲 本轮向量召回证据</h4>
+            <div id="vector-recall-view"></div>
+          </div>
+
+          <details class="df-block df-collapsible">
+            <summary><h4>📊 数据源参与度（✅ 已用 / ⚠️ 已读未融合 / ❌ 未读）</h4></summary>
+            <ul id="dataflow-sources"></ul>
+          </details>
+
+          <div class="df-block" id="context-pack-block">
+            <h4>Context Pack（装配后送给模型的多源上下文）</h4>
+            <pre id="context-pack"></pre>
+          </div>
+
+          <div class="df-block">
+            <h4>本轮写回</h4>
+            <div id="dataflow-writeback">
+              <span class="muted">（还没有交互）</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="memory-section">
+          <h3>🧠 玩家记忆 <span id="memory-count">(0)</span></h3>
+          <div id="memory-list">还没有记录…</div>
+          <div id="memory-summary"></div>
+        </section>
+      </aside>
+    </div>
+
+    <section id="creator-stage" class="hidden">
+      <div id="creator-editor">
+        <!-- ===== 新框架：项目演进时间线 ===== -->
+        <div id="project-timeline"></div>
+        <div id="project-step-detail"></div>
+
+        <!-- ===== 旧框架：保留代码不显示（has-legacy class 控制） ===== -->
+        <div class="legacy-block">
+        <div class="creator-section-title">🎨 我作为创作者，想做：</div>
+        <div id="creator-action-selector"></div>
+        <div id="creator-headline"></div>
+
+        <div id="creator-evolution"></div>
+
+        <div id="creator-gen-cards"></div>
+        <div id="creator-cost-chip"></div>
+
+        <div id="creator-dual">
+          <div class="dual-pane">
+            <div class="dual-title write-title">📝 创作态 · 创作者要写什么</div>
+            <div id="creator-write-body" class="dual-body"></div>
+          </div>
+          <div class="dual-pane">
+            <div class="dual-title runtime-title">🎮 运行态 · 玩家碰到时系统怎么用</div>
+            <div id="creator-runtime-body" class="dual-body"></div>
+          </div>
+        </div>
+        <div id="creator-publish-row">
+          <button id="creator-publish-btn">📤 发布到驿站</button>
+          <span id="creator-publish-status"></span>
+        </div>
+        </div><!-- /.legacy-block -->
+      </div>
+
+      <aside id="creator-capability-stack"></aside>
+
+      <div id="creator-preview">
+        <div class="creator-section-title">👁️ 产物预览 · 玩家会看到什么</div>
+
+        <div class="preview-block">
+          <div class="preview-block-title">🗺️ 在驿站里长这样</div>
+          <canvas id="bard-preview-canvas" width="128" height="128"></canvas>
+          <div class="preview-meta">位置 (10, 6) · 32×32 tile · 朝下</div>
+        </div>
+
+        <div class="preview-block">
+          <div class="preview-block-title">💬 给定玩家状态，他会说</div>
+          <div id="preview-state-chips">
+            <button class="state-chip active" data-state="first">初遇</button>
+            <button class="state-chip"        data-state="thief">偷过汤</button>
+            <button class="state-chip"        data-state="helpful">helpful</button>
+            <button class="state-chip"        data-state="extreme">复杂复合</button>
+          </div>
+          <div id="preview-dialogue">
+            <div id="preview-dialogue-name"></div>
+            <div id="preview-dialogue-text">选个状态，让伊莱说一句…</div>
+          </div>
+          <button id="preview-speak-btn">🎙️ 让伊莱说一句</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="debug-panel">
+      <button id="debug-toggle">📋 高级调试面板（SQL / Prompt / API 返回）▼</button>
+      <div id="debug-content" class="hidden">
+        <h3 id="debug-title">等待第一次对话…</h3>
+        <pre id="debug-text">和 NPC 对话后，这里会显示当前代背后的运行细节。</pre>
+      </div>
+    </section>
+  </div>
+
+  <!-- 加载顺序：public 默认 → local 本地覆盖（local 不入 git）-->
+  <script src="js/config.public.js"></script>
+  <script src="js/config.local.js" onerror="console.log('[config] config.local.js 缺失，沿用 public 默认')"></script>
+  <script src="js/config.js"></script>
+  <script src="js/backend.js"></script>
+  <script src="js/skills.js"></script>
+  <script src="js/memory.js"></script>
+  <script src="js/gen1.js"></script>
+  <script src="js/gen2.js"></script>
+  <script src="js/gen3.js"></script>
+  <script src="js/dialogue.js"></script>
+  <script src="js/debug.js"></script>
+  <script src="js/dataflow.js"></script>
+  <script src="js/creator.js"></script>
+  <script src="js/controls.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

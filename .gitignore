@@ -1,0 +1,30 @@
+.DS_Store
+node_modules/
+dist/
+
+# secret 配置 —— 不入 git
+.env
+.env.local
+.env.*.local
+js/config.local.js
+
+# SQLite 数据库 —— Railway Volume 会持久化，本地用各自的
+data/*.sqlite
+data/*.sqlite-journal
+data/*.sqlite-wal
+data/*.sqlite-shm
+data/*.sqlite.bak
+
+# 编辑器/系统垃圾
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 部署相关临时
+.vercel/
+.railway/
+
+# Claude Code 工具本地配置
+.claude/

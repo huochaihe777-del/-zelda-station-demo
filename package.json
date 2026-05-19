@@ -1,0 +1,17 @@
+{
+  "name": "zelda-station-demo",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node server.mjs",
+    "reset-db": "node server.mjs --reset",
+    "ingest-lore": "node server.mjs --ingest-lore",
+    "reindex-lore": "node server.mjs --reindex-lore",
+    "reindex-lore-force": "node server.mjs --reindex-lore --force"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
