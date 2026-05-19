@@ -1,0 +1,14 @@
+# Vercel 只服务静态前端，后端跑在 Railway
+# 这些后端相关的文件不要进 Vercel 部署
+
+server.mjs
+package.json
+package-lock.json
+nixpacks.toml
+railway.toml
+.env*
+data/
+node_modules/
+.git/
+.claude/
+DEPLOY.md
